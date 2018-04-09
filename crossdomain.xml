@@ -1,5 +1,4 @@
 <cross-domain-policy>
-    <site-control permitted-cross-domain-policies="master-only"/>  
-  <allow-access-from domain="*.cmpyy.com" /> 
+    <site-control permitted-cross-domain-policies="master-only"/>
+  <allow-access-from domain="*.cmpyy.com" />
 </cross-domain-policy>
-
