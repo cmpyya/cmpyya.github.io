@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="GB2312">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="referrer" content="never">
-<title>天天解析:808277914</title>
+<title>播放器</title>
 <link rel="stylesheet" href="js/DPlayer.min.css">
 <style type="text/css">
 body, html, .dplayer {
@@ -21,50 +21,44 @@ a {
 </head>
 <body>
 <div id="player" class="dplayer"></div>
-    <script src="js/DPlayer.min.js"></script>
-    <script src="js/flv.min.js"></script>
-    <script src="js/hls.min.js"></script>
-<script type="text/javascript">
-function getUrlParam(name)
-{
-     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-     var r = window.location.search.substr(1).match(reg);
-     if(r != null) return unescape(r[2]);
-     return null; 
+<script type="text/javascript" src="js/hls.min.js"></script>
+<script type="text/javascript" src="js/DPlayer.min.js" charset="utf-8"></script>
+<script src="js/flv.min.js"></script>
+<script language="JavaScript" type="text/javascript">
+function QueryString(){
+var name,value,i;
+var str=location.href;
+var num=str.indexOf("?")
+str=str.substr(num+1);
+var arrtmp=str.split("&");
+for(i=0;i < arrtmp.length;i++){
+num=arrtmp[i].indexOf("=");
+	if(num>0){
+		name=arrtmp[i].substring(0,num);
+		value=arrtmp[i].substr(num+1);
+		this[name]=value;
+	}
 }
-    var videoUrl =getUrlParam('url')
+}
+var Request=new QueryString();
+url=Request["url"];
   var isiPad = navigator.userAgent.match(/iPad|iPhone|Android|Linux|iPod/i) != null;
   if(isiPad){
-	document.getElementById('player').innerHTML = '<video src="'+ url +'" type="video/mp4" controls="controls" autoplay="true" controls="controls" poster="loading_wap.gif" width="100%" height="100%" x-webkit-airplay="allow"></video>';
+	document.getElementById('player').innerHTML = '<video src="'+ url +'" controls="controls" poster="loading.gif" width="100%" height="100%" x-webkit-airplay="allow"></video>';
       }else {
-		var pic = "";
-		var dplayer = new DPlayer({
-			element: document.getElementById("player"),
-			autoplay: true,
-			video: {
-                quality:[{
-                    type:'auto',
-                    name:'流畅',
-                    url:''+ url +''
-                  },{
-                    name:'高清',
-                    url:''+ url +''
-                   },{
-                    name:'超清',
-                    url:''+ url +''   
-                },{
-                    name:'蓝光',
-                    url:''+ url +''   
-                }],
-                defaultQuality:2
-            },
-        /*danmaku: {  
-            id: '',
-           
-        }*/
-		});
+var dplayer = new DPlayer({
+    element: document.getElementById('player'),
+    autoplay: true,
+    video: {
+        quality: [{
+            name: '自动',
+            url:''+ url +'',
+        }],
+        defaultQuality: 0,
+        type: 'hls'
+    }
+});
        }
 </script>
 </body>
 </html>
-    
