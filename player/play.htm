@@ -1,64 +1,59 @@
 <!DOCTYPE html>
-<html>
 <head>
-<meta charset="GB2312">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta name="referrer" content="never">
-<title>播放器</title>
-<link rel="stylesheet" href="js/DPlayer.min.css">
-<style type="text/css">
-body, html, .dplayer {
-			padding: 0;
-			margin: 0;
-			width: 100%;
-			height: 100%;
-			background-color:#000;
-		}
-a {
-    text-decoration: none;
-  }
-</style>
-</head>
-<body>
-<div id="player" class="dplayer"></div>
+<title>DP播放器</title>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<meta http-equiv="content-language" content="zh-CN" />
+<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta name="referrer" content="never" />
+<meta name="renderer" content="webkit" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="x5-page-mode" content="app" />
+<meta name="Viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<style type="text/css">*{margin: 0;padding: 0;font-family: "Microsoft YaHei",SimHei,"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:13px;}img{border: 0;}a{color:inherit;text-decoration: none;color:#4B7E9D;}a:hover{text-decoration: underline;}body{background:#000;padding: 0;margin: 0;width:100%;height:100%;color:#fff;overflow:hidden;cursor: default;}.error{position:absolute;width:100%;height:100%;text-align:center;top:50%;margin:-30px 0 0 0;z-index:10;}.player,#dpplayer{position:absolute;width:100%;height:100%;}.dplayer-menu{display:none !important;}.torrentnum{padding: 5px;position: absolute;font-size: 12px;}</style>
+<link rel="stylesheet" href="dplayer/dplayer.min.css" type="text/css" />
 <script type="text/javascript" src="js/hls.min.js"></script>
-<script type="text/javascript" src="js/DPlayer.min.js" charset="utf-8"></script>
-<script src="js/flv.min.js"></script>
-<script language="JavaScript" type="text/javascript">
-function QueryString(){
-var name,value,i;
-var str=location.href;
-var num=str.indexOf("?")
-str=str.substr(num+1);
-var arrtmp=str.split("&");
-for(i=0;i < arrtmp.length;i++){
-num=arrtmp[i].indexOf("=");
-	if(num>0){
-		name=arrtmp[i].substring(0,num);
-		value=arrtmp[i].substr(num+1);
-		this[name]=value;
-	}
+<script type="text/javascript" src="js/flv.min.js"></script>
+<script type="text/javascript" src="js/dplayer.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/ngcdn-dist" charset="utf-8"></script>
+<script type="text/javascript" src="//cdn.bskchina.cn/p2p/p2p.js"></script>
+<script type="text/javascript" src="//cdn.btjson.com/p2pjs/1.1/p2p.js"></script>
+<script type="text/javascript">
+function getUrlParam(name)
+{
+     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r != null) return unescape(r[2]);
+     return null; 
 }
-}
-var Request=new QueryString();
-url=Request["url"];
+    var videoUrl =getUrlParam('url')
   var isiPad = navigator.userAgent.match(/iPad|iPhone|Android|Linux|iPod/i) != null;
   if(isiPad){
 	document.getElementById('player').innerHTML = '<video src="'+ url +'" controls="controls" poster="loading.gif" width="100%" height="100%" x-webkit-airplay="allow"></video>';
       }else {
-var dplayer = new DPlayer({
-    element: document.getElementById('player'),
-    autoplay: true,
-    video: {
-        quality: [{
-            name: '自动',
-            url:''+ url +'',
-        }],
-        defaultQuality: 0,
-        type: 'auto'
-    }
+
+window.onload = function(){
+var dp = new DPlayer({
+container:document.getElementById('dpplayer'),
+autoplay:true,
+allowfullscreen:true,
+preload: 'auto',
+volume: 0.7,
+video:{
+quality:[{
+type:'auto',
+name:'自动',
+url:''+ url +''
+defaultQuality:0
+}
 });
-       }
+dp.play();
+};
 </script>
+</head>
+<body>
+<div id="dpplayer"></div>
 </body>
 </html>
