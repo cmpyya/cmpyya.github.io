@@ -19,15 +19,13 @@ function getUrlParam(name)
     var videoUrl =getUrlParam('url');
 	var hls=getUrlParam('hls');
 	var videoObject = {
-		container: '#video',
-		variable: 'player',
-		flashplayer:false,
-		autoplay:true,
-     	video: videoUrl
+		container: 'video',
+		variable:'player',
+		video: videoUrl
 	};
 	if(hls!=null){
-    	   videoObject['html5m3u8']=true;
-     	}
+		videoObject['html5m3u8']=true;
+	}
 	var player=new ckplayer(videoObject);
 </script>
 </body>
