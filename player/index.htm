@@ -17,7 +17,6 @@ function getUrlParam(name)
      return null; 
 }
     var videoUrl =getUrlParam('url');
-	var hls=getUrlParam('hls');
 	var videoObject = {
 		container: '#video',
 		variable:'player',
@@ -25,9 +24,6 @@ function getUrlParam(name)
 		autoplay:true,
 		video: videoUrl
 	};
-	if(hls!=null){
-		videoObject['html5m3u8']=true;
-	}
 	var player=new ckplayer(videoObject);
 </script>
 </body>
